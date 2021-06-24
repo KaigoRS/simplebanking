@@ -15,6 +15,7 @@ class Banking:
                 'balance INTEGER DEFAULT 0);')
     conn.commit()
 
+    
     def __init__(self):
         self.IIN = 400000
         self.account_num = 000000000
@@ -24,6 +25,7 @@ class Banking:
         self.balance = 0
         self.menu()
 
+        
     def menu(self):
         print('1. Create an account')
         print('2. Log into account')
@@ -42,6 +44,7 @@ class Banking:
             print('Incorrect input')
             self.menu()
 
+            
     def create_account(self):
         while True:
             self.account_num = str(random.randint(0, 10 ** 9 - 1))
@@ -67,6 +70,7 @@ class Banking:
         self.conn.commit()
         self.menu()
 
+        
     def make_checksum(self, number):
         number = number[:-1]
         number = [int(i) for i in number]
@@ -79,14 +83,14 @@ class Banking:
             self.checksum = str(10 - count % 10)
         return self.checksum
 
+    
     def log_account(self):
         print('Enter your card number:')
         num = input()
         print('Enter your PIN:')
         pin = input()
-
+        
         if num in self.card_numbers:
-
             cardnum = num
             digit_sum = 0
 
@@ -108,11 +112,11 @@ class Banking:
             else:
                 print("Wrong card number or PIN!")
                 self.menu()
-
         else:
             print('Wrong card number or PIN!')
             self.menu()
 
+            
     def account_details(self, card_number):
         print()
         x = True
@@ -146,6 +150,7 @@ class Banking:
                 self.exit()
                 x = 0
 
+                
     def add_income(self):
         print("Enter how much money you want to add:")
         self.income = float(input())
@@ -154,16 +159,15 @@ class Banking:
         self.conn.commit()
         print("Success!")
 
+        
     def transfer_income(self, card_number):
         print("Enter card number:")
         num = input()
         self.cur.execute("SELECT number FROM card")
         result = self.cur.fetchall()
         final_result = [i[0] for i in result]
-
         cardnum = num
         digit_sum = 0
-
         for i, digit in enumerate(reversed(cardnum)):
             n = int(digit)
             if i % 2 == 0:
@@ -192,13 +196,12 @@ class Banking:
             self.account_details(card_number)
 
 
-
-
     def close_account(self):
         self.cur.execute(f"DELETE FROM card WHERE number = {self.card_num}")
         self.conn.commit()
         print("The account has been closed!")
 
+        
     def exit(self):
         print('Bye!')
         quit()
