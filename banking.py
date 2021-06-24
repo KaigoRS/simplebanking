@@ -71,7 +71,7 @@ class Banking:
         self.menu()
 
         
-    def make_checksum(self, number):
+    def make_checksum(self, number: str) -> str:
         number = number[:-1]
         number = [int(i) for i in number]
         number = [number[i - 1] if i % 2 == 0 else number[i - 1] * 2 for i in range(1, 16)]
@@ -117,7 +117,7 @@ class Banking:
             self.menu()
 
             
-    def account_details(self, card_number):
+    def account_details(self, card_number: str):
         print()
         x = True
         while x:
