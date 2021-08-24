@@ -4,6 +4,7 @@ from typing import List, Any
 
 
 class Banking:
+    # Can make this part into part of init if creating multiple instances of class Banking
     details = {}
     card_numbers: list[Any] = []
     conn = sqlite3.connect('card.s3db')
